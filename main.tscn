@@ -1,0 +1,90 @@
+[gd_scene load_steps=12 format=3 uid="uid://rfqk2qtumhy8"]
+
+[ext_resource type="PackedScene" uid="uid://clodvw5atu83l" path="res://scenes/Player.tscn" id="1_am4jb"]
+[ext_resource type="Texture2D" uid="uid://b82ftgf1fxyl5" path="res://assets/tiles/gray-tile.png" id="1_rws8h"]
+[ext_resource type="Script" path="res://main.gd" id="1_sh7er"]
+[ext_resource type="Texture2D" uid="uid://wregl1alc7i1" path="res://assets/tiles/block-tile.png" id="2_71yot"]
+[ext_resource type="PackedScene" uid="uid://bs445ow7kf04b" path="res://scenes/Rock.tscn" id="2_mbhnh"]
+[ext_resource type="PackedScene" uid="uid://daxsw7ajxlvl4" path="res://scenes/PlayerAim.tscn" id="5_8o8jv"]
+[ext_resource type="PackedScene" uid="uid://c1p1qcgc1p2jx" path="res://scenes/Laser.tscn" id="7_xdvxa"]
+[ext_resource type="PackedScene" uid="uid://23yinhhnnmmh" path="res://scenes/DestructibleBlock.tscn" id="8_l3a73"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4i0o8"]
+resource_name = "gray"
+texture = ExtResource("1_rws8h")
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1yqmd"]
+resource_name = "block"
+texture = ExtResource("2_71yot")
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
+
+[sub_resource type="TileSet" id="TileSet_uxkuj"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_4i0o8")
+sources/1 = SubResource("TileSetAtlasSource_1yqmd")
+
+[node name="Root" type="Node2D"]
+script = ExtResource("1_sh7er")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.81, 2.81)
+
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+tile_set = SubResource("TileSet_uxkuj")
+format = 2
+layer_0/tile_data = PackedInt32Array(-196612, 0, 0, -131076, 0, 0, -65540, 0, 0, -4, 0, 0, 65532, 0, 0, 131068, 0, 0, 196604, 0, 0, 262140, 0, 0, -196611, 0, 0, -131075, 0, 0, -65539, 0, 0, -3, 0, 0, 65533, 0, 0, 131069, 0, 0, 196605, 0, 0, 262141, 0, 0, -196610, 0, 0, -131074, 0, 0, -65538, 0, 0, -2, 0, 0, 65534, 0, 0, 131070, 0, 0, 196606, 0, 0, 262142, 0, 0, -196609, 0, 0, -131073, 0, 0, -65537, 0, 0, -1, 0, 0, 65535, 0, 0, 131071, 0, 0, 196607, 0, 0, 262143, 0, 0, -262144, 0, 0, -196608, 0, 0, -131072, 0, 0, -65536, 0, 0, 0, 0, 0, 65536, 0, 0, 131072, 0, 0, 196608, 0, 0, -262143, 0, 0, -196607, 0, 0, -131071, 0, 0, -65535, 0, 0, 1, 0, 0, 65537, 0, 0, 131073, 0, 0, 196609, 0, 0, -262142, 0, 0, -196606, 0, 0, -131070, 0, 0, -65534, 0, 0, 2, 0, 0, 65538, 0, 0, 131074, 0, 0, 196610, 0, 0, -262141, 0, 0, -196605, 0, 0, -131069, 0, 0, -65533, 0, 0, 3, 0, 0, 65539, 0, 0, 131075, 0, 0, 196611, 0, 0, -262149, 1, 0, -262148, 1, 0, -262147, 1, 0, -262146, 1, 0, -262145, 1, 0, -327680, 1, 0, -327679, 1, 0, -327678, 1, 0, -327677, 1, 0, -327676, 1, 0, -262140, 1, 0, -196604, 1, 0, -131068, 1, 0, -65532, 1, 0, 4, 1, 0, 65540, 1, 0, 131076, 1, 0, 196612, 1, 0, 262148, 1, 0, 262147, 1, 0, 262146, 1, 0, 262145, 1, 0, 262144, 1, 0, 327679, 1, 0, 327678, 1, 0, 327677, 1, 0, 327676, 1, 0, 327675, 1, 0, 262139, 1, 0, 196603, 1, 0, 131067, 1, 0, 65531, 1, 0, -5, 1, 0, -65541, 1, 0, -131077, 1, 0, -196613, 1, 0)
+
+[node name="Rocks" type="Node2D" parent="."]
+visible = false
+position = Vector2(224, 0)
+
+[node name="1Rock" parent="Rocks" instance=ExtResource("2_mbhnh")]
+position = Vector2(32, -64)
+
+[node name="Rock2" parent="Rocks" instance=ExtResource("2_mbhnh")]
+position = Vector2(32, 32)
+
+[node name="Rock3" parent="Rocks" instance=ExtResource("2_mbhnh")]
+position = Vector2(64, -16)
+
+[node name="Rock4" parent="Rocks" instance=ExtResource("2_mbhnh")]
+position = Vector2(96, -16)
+
+[node name="Rock5" parent="Rocks" instance=ExtResource("2_mbhnh")]
+position = Vector2(128, -16)
+
+[node name="Rock6" parent="Rocks" instance=ExtResource("2_mbhnh")]
+position = Vector2(128, 16)
+
+[node name="Rock7" parent="Rocks" instance=ExtResource("2_mbhnh")]
+position = Vector2(128, 48)
+
+[node name="DestructibleBlock" parent="." instance=ExtResource("8_l3a73")]
+position = Vector2(80, -16)
+gravity_scale = 1.66533e-16
+
+[node name="PlayerAim" parent="." instance=ExtResource("5_8o8jv")]
+position = Vector2(48, -16)
+
+[node name="PlayerLaser" parent="." node_paths=PackedStringArray("root", "player_body", "player_aim") instance=ExtResource("7_xdvxa")]
+position = Vector2(-16, -16)
+target_position = Vector2(64, 2.08165e-12)
+root = NodePath("..")
+player_body = NodePath("../PlayerBody")
+player_aim = NodePath("../PlayerAim")
+
+[node name="PlayerBody" parent="." node_paths=PackedStringArray("root", "player_aim") instance=ExtResource("1_am4jb")]
+texture_filter = 1
+position = Vector2(-16, -16)
+root = NodePath("..")
+player_aim = NodePath("../PlayerAim")

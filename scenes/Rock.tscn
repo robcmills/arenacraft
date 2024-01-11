@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bs445ow7kf04b"]
+
+[ext_resource type="Texture2D" uid="uid://bq3brpup44va3" path="res://assets/tiles/kenney_pixel-platformer-blocks/Tiles/Rock/tile_0009.png" id="1_mo4pm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqq13"]
+size = Vector2(32, 32)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1.77778, 1.77778)
+texture = ExtResource("1_mo4pm")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_hqq13")

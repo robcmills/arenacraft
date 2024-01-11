@@ -1,0 +1,85 @@
+[gd_scene load_steps=13 format=3 uid="uid://clodvw5atu83l"]
+
+[ext_resource type="Texture2D" uid="uid://c1p13ljisddns" path="res://assets/sprites/blue-circle-simple.png" id="1_iwmac"]
+[ext_resource type="Script" path="res://scenes/Player.gd" id="1_xgis2"]
+[ext_resource type="Texture2D" uid="uid://cuu7en1h8rhgp" path="res://assets/sprites/player_body_laser.png" id="3_4i721"]
+[ext_resource type="Texture2D" uid="uid://pck4b8w2kr6o" path="res://assets/sprites/player_body_laser_cooldownt.png" id="4_aqys7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5lulx"]
+size = Vector2(32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xa3q"]
+atlas = ExtResource("4_aqys7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvrac"]
+atlas = ExtResource("4_aqys7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grlhl"]
+atlas = ExtResource("4_aqys7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rofo"]
+atlas = ExtResource("4_aqys7")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bobrp"]
+atlas = ExtResource("4_aqys7")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lik5b"]
+atlas = ExtResource("4_aqys7")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nvj2o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xa3q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvrac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_grlhl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rofo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bobrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lik5b")
+}],
+"loop": false,
+"name": &"default",
+"speed": 42.0
+}]
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_xgis2")
+
+[node name="CircleSprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_iwmac")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5lulx")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(2.08165e-12, 32)
+collide_with_areas = true
+
+[node name="ShootSprite2D" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+texture = ExtResource("3_4i721")
+
+[node name="ShootSpriteCooldown" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_nvj2o")
+
+[connection signal="animation_finished" from="ShootSpriteCooldown" to="." method="_on_shoot_sprite_cooldown_animation_finished"]
