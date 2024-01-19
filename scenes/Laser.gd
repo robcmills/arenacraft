@@ -8,10 +8,11 @@ extends RayCast2D
 @onready var line = $Line2D
 @onready var collision_particles = $GPUParticles2D
 
-var is_casting = false
-var impulse_force = 10
+var is_casting = true
+var impulse_force = 50
 
 func _ready():
+	print("Laser ready")
 	root.connect("player_shoot", self.shoot)
 
 func _physics_process(_delta: float) -> void:
@@ -28,11 +29,11 @@ func shoot() -> void:
 	is_casting = true
 	collision_particles.emitting = true
 	line.show()
-	if is_colliding() and get_collider() is RigidBody2D:
-		get_collider().apply_impulse(
-			-get_collision_normal() * impulse_force,
-			get_collision_point()
-		)
+	force_raycast_update()
+	if is_colliding():
+		var collider = get_collider()
+		if collider.has_method("on_laser_collision"):
+			collider.on_laser_collision(self)
 	await get_tree().create_timer(0.1).timeout
 	collision_particles.emitting = false
 	line.hide()

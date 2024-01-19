@@ -1,15 +1,83 @@
-[gd_scene load_steps=3 format=3 uid="uid://23yinhhnnmmh"]
+[gd_scene load_steps=6 format=3 uid="uid://23yinhhnnmmh"]
 
-[ext_resource type="Texture2D" uid="uid://bxoni5ftx8bav" path="res://assets/tiles/sand-block.png" id="1_a3ux7"]
+[ext_resource type="Texture2D" uid="uid://dh1eloqetnjst" path="res://assets/tiles/destructable_block.png" id="1_1jmuu"]
+[ext_resource type="Script" path="res://scenes/DestructibleBlock.gd" id="1_awu72"]
+[ext_resource type="Texture2D" uid="uid://dkvkwsolb1jco" path="res://assets/tiles/fragment.png" id="3_o1jyt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8hkl"]
 size = Vector2(32, 32)
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hnpxw"]
+size = Vector2(16, 16)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="RigidBody2D" type="RigidBody2D"]
+script = ExtResource("1_awu72")
+
+[node name="BlockCollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_h8hkl")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="BlockSprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("1_a3ux7")
+texture = ExtResource("1_1jmuu")
+
+[node name="Fragments" type="Node2D" parent="."]
+visible = false
+
+[node name="Fragment1" type="RigidBody2D" parent="Fragments"]
+collision_layer = 2
+collision_mask = 2
+gravity_scale = 1.66533e-16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fragments/Fragment1"]
+position = Vector2(-8, -8)
+shape = SubResource("RectangleShape2D_hnpxw")
+
+[node name="Sprite2D" type="Sprite2D" parent="Fragments/Fragment1"]
+texture_filter = 1
+position = Vector2(-8, -8)
+texture = ExtResource("3_o1jyt")
+
+[node name="Fragment2" type="RigidBody2D" parent="Fragments"]
+position = Vector2(16, 0)
+collision_layer = 2
+collision_mask = 2
+gravity_scale = 1.66533e-16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fragments/Fragment2"]
+position = Vector2(-8, -8)
+shape = SubResource("RectangleShape2D_hnpxw")
+
+[node name="Sprite2D" type="Sprite2D" parent="Fragments/Fragment2"]
+texture_filter = 1
+position = Vector2(-8, -8)
+texture = ExtResource("3_o1jyt")
+
+[node name="Fragment3" type="RigidBody2D" parent="Fragments"]
+position = Vector2(0, 16)
+collision_layer = 2
+collision_mask = 2
+gravity_scale = 1.66533e-16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fragments/Fragment3"]
+position = Vector2(-8, -8)
+shape = SubResource("RectangleShape2D_hnpxw")
+
+[node name="Sprite2D" type="Sprite2D" parent="Fragments/Fragment3"]
+texture_filter = 1
+position = Vector2(-8, -8)
+texture = ExtResource("3_o1jyt")
+
+[node name="Fragment4" type="RigidBody2D" parent="Fragments"]
+position = Vector2(16, 16)
+collision_layer = 2
+collision_mask = 2
+gravity_scale = 1.66533e-16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fragments/Fragment4"]
+position = Vector2(-8, -8)
+shape = SubResource("RectangleShape2D_hnpxw")
+
+[node name="Sprite2D" type="Sprite2D" parent="Fragments/Fragment4"]
+texture_filter = 1
+position = Vector2(-8, -8)
+texture = ExtResource("3_o1jyt")

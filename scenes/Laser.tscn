@@ -34,6 +34,7 @@ alpha_curve = SubResource("CurveTexture_vnd43")
 
 [node name="PlayerLaser" type="RayCast2D"]
 target_position = Vector2(64, 0)
+collision_mask = 3
 script = ExtResource("1_sg6o7")
 
 [node name="Line2D" type="Line2D" parent="."]
